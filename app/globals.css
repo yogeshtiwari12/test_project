@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a3a;
+    border-radius: 3px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+}
+
+@layer components {
+  /* ── File cards ── */
+  .file-card {
+    @apply transition-all duration-150;
+  }
+  .file-card:hover {
+    background: #1c1c28 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+  .file-card.selected {
+    background: #1e1e35 !important;
+    outline: 1.5px solid #6366f1;
+  }
+
+  /* ── Sidebar items ── */
+  .sidebar-item {
+    @apply cursor-pointer rounded-[10px] transition-colors duration-100;
+  }
+  .sidebar-item:hover {
+    background: #1c1c28;
+  }
+  .sidebar-item.active {
+    background: #1e1e35;
+    color: #818cf8;
+  }
+
+  /* ── Generic buttons ── */
+  .btn {
+    @apply cursor-pointer transition-opacity duration-150;
+  }
+  .btn:hover {
+    opacity: 0.85;
+  }
+
+  /* ── Icon buttons ── */
+  .icon-btn {
+    @apply cursor-pointer rounded-lg p-1.5 transition-colors duration-100;
+  }
+  .icon-btn:hover {
+    background: #1c1c28;
+  }
+
+  /* ── Drag-over state ── */
+  .drag-over {
+    border: 2px dashed #6366f1 !important;
+    background: rgba(18, 18, 32, 0.53) !important;
+  }
+
+  /* ── Context menu items ── */
+  .context-menu-item {
+    @apply flex cursor-pointer items-center gap-2.5 rounded-lg px-4 py-2.5 text-[13.5px] transition-colors duration-100;
+  }
+  .context-menu-item:hover {
+    background: #1e1e35;
+  }
+
+  /* ── Upload / New button ── */
+  .upload-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    @apply flex cursor-pointer items-center gap-2 rounded-xl border-none px-5 py-2.5 text-sm font-semibold text-white
+           transition-all duration-150 font-[inherit];
+  }
+  .upload-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  /* ── Storage progress bar ── */
+  .progress-bar {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    @apply h-1 rounded-sm transition-[width] duration-300;
+  }
+}
+
+@layer utilities {
+  /* ── Animations ── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  .animate-in {
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .slide-in {
+    animation: slideIn 0.25s ease both;
+  }
+}
