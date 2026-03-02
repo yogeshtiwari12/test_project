@@ -4,6 +4,10 @@ import { v } from 'convex/values';
 
 export default defineSchema({
 
+  numbers: defineTable({
+    value: v.number(),
+  }),
+
   files: defineTable({
     filetype: v.string(), 
     filesize: v.number(), 
