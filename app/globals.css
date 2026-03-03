@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #040812;
+  --foreground: #e2e8f0;
+  --accent:     #1d6af0;
+  --accent-2:   #0ea5e9;
 }
 
 @theme inline {
@@ -15,8 +17,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #040812;
+    --foreground: #e2e8f0;
   }
 }
 
@@ -29,7 +31,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
 }
 
 @layer base {
@@ -49,7 +51,7 @@ body {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #2a2a3a;
+    background: #122040;
     border-radius: 3px;
   }
 
@@ -64,13 +66,13 @@ body {
     @apply transition-all duration-150;
   }
   .file-card:hover {
-    background: #1c1c28 !important;
+    background: #0a1838 !important;
     transform: translateY(-1px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   }
   .file-card.selected {
-    background: #1e1e35 !important;
-    outline: 1.5px solid #6366f1;
+    background: #0d1c48 !important;
+    outline: 1.5px solid #1d6af0;
   }
 
   /* ── Sidebar items ── */
@@ -78,11 +80,11 @@ body {
     @apply cursor-pointer rounded-[10px] transition-colors duration-100;
   }
   .sidebar-item:hover {
-    background: #1c1c28;
+    background: #0a1838;
   }
   .sidebar-item.active {
-    background: #1e1e35;
-    color: #818cf8;
+    background: #0d1c48;
+    color: #4d9ff5;
   }
 
   /* ── Generic buttons ── */
@@ -98,13 +100,13 @@ body {
     @apply cursor-pointer rounded-lg p-1.5 transition-colors duration-100;
   }
   .icon-btn:hover {
-    background: #1c1c28;
+    background: #0a1838;
   }
 
   /* ── Drag-over state ── */
   .drag-over {
-    border: 2px dashed #6366f1 !important;
-    background: rgba(18, 18, 32, 0.53) !important;
+    border: 2px dashed #1d6af0 !important;
+    background: rgba(4, 12, 32, 0.6) !important;
   }
 
   /* ── Context menu items ── */
@@ -112,12 +114,12 @@ body {
     @apply flex cursor-pointer items-center gap-2.5 rounded-lg px-4 py-2.5 text-[13.5px] transition-colors duration-100;
   }
   .context-menu-item:hover {
-    background: #1e1e35;
+    background: #0d1c48;
   }
 
   /* ── Upload / New button ── */
   .upload-btn {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: linear-gradient(135deg, #1d6af0, #0ea5e9);
     @apply flex cursor-pointer items-center gap-2 rounded-xl border-none px-5 py-2.5 text-sm font-semibold text-white
            transition-all duration-150 font-[inherit];
   }
@@ -128,7 +130,7 @@ body {
 
   /* ── Storage progress bar ── */
   .progress-bar {
-    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    background: linear-gradient(90deg, #1d6af0, #0ea5e9);
     @apply h-1 rounded-sm transition-[width] duration-300;
   }
 }

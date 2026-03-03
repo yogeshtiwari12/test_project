@@ -11,7 +11,6 @@ type FileType = "folder" | "image" | "pdf" | "doc" | "video" | "zip" | "code" | 
 type ViewMode = "grid" | "list";
 type SidebarSection = "my-drive" | "shared" | "recent" | "starred" | "trash";
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 function mimeToType(mime: string): FileType {
   if (mime.startsWith("image/"))  return "image";
   if (mime === "application/pdf") return "pdf";
@@ -73,17 +72,17 @@ const Icon = ({ name, size = 18, className = "" }: { name: string; size?: number
   );
 };
 
-// ─── File Icon ────────────────────────────────────────────────────────────────
+
 const FileIcon = ({ type, size = 40 }: { type: FileType; size?: number }) => {
   const configs: Record<FileType, { icon: string; bg: string }> = {
-    folder: { icon: "folder", bg: "#6366f1" },
+    folder: { icon: "folder", bg: "#1d6af0" },
     image:  { icon: "image",  bg: "#0ea5e9" },
     pdf:    { icon: "pdf",    bg: "#ef4444" },
     doc:    { icon: "doc",    bg: "#3b82f6" },
-    video:  { icon: "video",  bg: "#8b5cf6" },
+    video:  { icon: "video",  bg: "#0369a1" },
     zip:    { icon: "zip",    bg: "#f59e0b" },
     code:   { icon: "code",   bg: "#10b981" },
-    other:  { icon: "file",   bg: "#6b7280" },
+    other:  { icon: "file",   bg: "#4a6180" },
   };
   const { icon, bg } = configs[type];
   return (
@@ -268,7 +267,7 @@ export default function DrivePage() {
 
   return (
     <div
-      style={{ fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", background: "#0f0f13", height: "100%", color: "#e4e4f0", display: "flex", flexDirection: "column", overflow: "hidden" }}
+      style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif", background: "#040812", height: "100%", color: "#e2e8f0", display: "flex", flexDirection: "column", overflow: "hidden" }}
       onClick={() => { setContextMenu(null); setSelected([]); }}
     >
       <input
@@ -281,7 +280,7 @@ export default function DrivePage() {
 
       <div style={{ display: "flex", flex: 1, minHeight: 0 }}>
         {/* ── Sidebar ── */}
-        <aside style={{ width: 220, background: "#0f0f13", borderRight: "1px solid #1a1a28", padding: "16px 12px", display: "flex", flexDirection: "column", gap: 4, overflowY: "auto", flexShrink: 0, height: "100%" }}>
+        <aside style={{ width: 220, background: "#040812", borderRight: "1px solid #091528", padding: "16px 12px", display: "flex", flexDirection: "column", gap: 4, overflowY: "auto", flexShrink: 0, height: "100%" }}>
           <button
             className="upload-btn"
             style={{ marginBottom: 12, width: "100%", justifyContent: "center" }}
@@ -297,7 +296,7 @@ export default function DrivePage() {
             <div
               key={item.id}
               className={`sidebar-item ${activeSection === item.id ? "active" : ""}`}
-              style={{ display: "flex", alignItems: "center", gap: 12, padding: "9px 12px", color: activeSection === item.id ? "#818cf8" : "#9ca3af" }}
+              style={{ display: "flex", alignItems: "center", gap: 12, padding: "9px 12px", color: activeSection === item.id ? "#4d9ff5" : "#8fa3b1" }}
               onClick={e => { e.stopPropagation(); setActiveSection(item.id); setSearchQuery(""); }}
             >
               <Icon name={item.icon} size={17} />
@@ -306,16 +305,16 @@ export default function DrivePage() {
           ))}
 
           <div style={{ marginTop: "auto", paddingTop: 24 }}>
-            <div style={{ background: "#161622", borderRadius: 12, padding: 14 }}>
+            <div style={{ background: "#060d20", borderRadius: 12, padding: 14 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                <span style={{ fontSize: 12, color: "#9ca3af", fontWeight: 500 }}>Storage</span>
-                <span style={{ fontSize: 11, color: "#6b7280" }}>{storageGB} / {storageLimitGB} GB</span>
+                <span style={{ fontSize: 12, color: "#8fa3b1", fontWeight: 500 }}>Storage</span>
+                <span style={{ fontSize: 11, color: "#4a6180" }}>{storageGB} / {storageLimitGB} GB</span>
               </div>
-              <div style={{ background: "#2a2a3a", borderRadius: 4, height: 4, overflow: "hidden" }}>
+              <div style={{ background: "#122040", borderRadius: 4, height: 4, overflow: "hidden" }}>
                 <div className="progress-bar" style={{ width: `${storageUsedPct}%` }} />
               </div>
-              <p style={{ fontSize: 11, color: "#6b7280", marginTop: 8 }}>{100 - storageUsedPct}% free remaining</p>
-              <Link href="/upgrade" style={{ display: "block", marginTop: 12, textAlign: "center", background: "linear-gradient(135deg, #6366f1, #8b5cf6)", color: "#fff", fontSize: 12, fontWeight: 700, padding: "7px 0", borderRadius: 8, textDecoration: "none", letterSpacing: "0.02em" }}>⚡ Upgrade Storage</Link>
+              <p style={{ fontSize: 11, color: "#4a6180", marginTop: 8 }}>{100 - storageUsedPct}% free remaining</p>
+              <Link href="/upgrade" style={{ display: "block", marginTop: 12, textAlign: "center", background: "linear-gradient(135deg, #1d6af0, #0ea5e9)", color: "#fff", fontSize: 12, fontWeight: 700, padding: "7px 0", borderRadius: 8, textDecoration: "none", letterSpacing: "0.02em" }}>⚡ Upgrade Storage</Link>
             </div>
           </div>
         </aside>
@@ -335,7 +334,7 @@ export default function DrivePage() {
                 {sidebarItems.find(s => s.id === activeSection)?.label || "My Drive"}
               </h1>
               {selected.length > 0 && (
-                <span style={{ background: "#1e1e35", color: "#818cf8", fontSize: 12, fontWeight: 600, padding: "3px 10px", borderRadius: 20 }}>
+                <span style={{ background: "#0d1c48", color: "#4d9ff5", fontSize: 12, fontWeight: 600, padding: "3px 10px", borderRadius: 20 }}>
                   {selected.length} selected
                 </span>
               )}
@@ -343,35 +342,35 @@ export default function DrivePage() {
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               {/* Search */}
               <div style={{ position: "relative" }}>
-                <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#6b7280", pointerEvents: "none" }}>
+                <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#4a6180", pointerEvents: "none" }}>
                   <Icon name="search" size={15} />
                 </div>
                 <input
                   value={searchQuery}
                   onChange={e => setSearchQuery(e.target.value)}
                   placeholder="Search files…"
-                  style={{ background: "#161622", border: "1px solid #2a2a3a", borderRadius: 10, padding: "7px 14px 7px 36px", color: "#e4e4f0", fontSize: 13, width: 200, transition: "border-color 0.15s, width 0.2s" }}
-                  onFocus={e => { e.target.style.borderColor = "#6366f1"; e.target.style.width = "260px"; }}
-                  onBlur={e => { e.target.style.borderColor = "#2a2a3a"; e.target.style.width = "200px"; }}
+                  style={{ background: "#060d20", border: "1px solid #122040", borderRadius: 10, padding: "7px 14px 7px 36px", color: "#e2e8f0", fontSize: 13, width: 200, transition: "border-color 0.15s, width 0.2s" }}
+                  onFocus={e => { e.target.style.borderColor = "#1d6af0"; e.target.style.width = "260px"; }}
+                  onBlur={e => { e.target.style.borderColor = "#122040"; e.target.style.width = "200px"; }}
                 />
               </div>
               {selected.length > 0 && (
                 <>
-                  <button className="btn" style={{ background: "transparent", border: "1px solid #2a2a3a", color: "#9ca3af", padding: "7px 14px", borderRadius: 9, fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}
+                  <button className="btn" style={{ background: "transparent", border: "1px solid #122040", color: "#8fa3b1", padding: "7px 14px", borderRadius: 9, fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}
                     onClick={e => { e.stopPropagation(); void deleteSelected(); }}>
                     <Icon name="trash" size={14} />Delete
                   </button>
-                  <button className="btn" style={{ background: "transparent", border: "1px solid #2a2a3a", color: "#9ca3af", padding: "7px 14px", borderRadius: 9, fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}
+                  <button className="btn" style={{ background: "transparent", border: "1px solid #122040", color: "#8fa3b1", padding: "7px 14px", borderRadius: 9, fontSize: 13, display: "flex", alignItems: "center", gap: 6 }}
                     onClick={e => { e.stopPropagation(); selected.forEach(downloadFile); }}>
                     <Icon name="download" size={14} />Download
                   </button>
                 </>
               )}
-              <div style={{ background: "#161622", border: "1px solid #2a2a3a", borderRadius: 9, display: "flex", overflow: "hidden" }}>
+              <div style={{ background: "#060d20", border: "1px solid #122040", borderRadius: 9, display: "flex", overflow: "hidden" }}>
                 {(["grid", "list"] as ViewMode[]).map(mode => (
                   <button key={mode} className="btn"
                     onClick={e => { e.stopPropagation(); setViewMode(mode); }}
-                    style={{ background: viewMode === mode ? "#1e1e35" : "transparent", border: "none", color: viewMode === mode ? "#818cf8" : "#6b7280", padding: "7px 10px", cursor: "pointer" }}>
+                    style={{ background: viewMode === mode ? "#0d1c48" : "transparent", border: "none", color: viewMode === mode ? "#4d9ff5" : "#4a6180", padding: "7px 10px", cursor: "pointer" }}>
                     <Icon name={mode} size={16} />
                   </button>
                 ))}
@@ -380,8 +379,8 @@ export default function DrivePage() {
           </div>
 
           {dragging && (
-            <div style={{ position: "fixed", inset: 0, background: "rgba(99,102,241,0.08)", border: "2px dashed #6366f1", pointerEvents: "none", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ background: "#1a1a2e", borderRadius: 16, padding: "32px 48px", textAlign: "center" }}>
+            <div style={{ position: "fixed", inset: 0, background: "rgba(29,106,240,0.07)", border: "2px dashed #1d6af0", pointerEvents: "none", zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ background: "#040c20", borderRadius: 16, padding: "32px 48px", textAlign: "center" }}>
                 <Icon name="upload" size={40} />
                 <p style={{ marginTop: 12, fontWeight: 600, fontSize: 16 }}>Drop files to upload</p>
               </div>
@@ -389,28 +388,28 @@ export default function DrivePage() {
           )}
 
           {uploadProgress && (
-            <div style={{ marginBottom: 16, background: "#161622", border: "1px solid #2a2a3a", borderRadius: 10, padding: "14px 16px" }}>
+            <div style={{ marginBottom: 16, background: "#060d20", border: "1px solid #122040", borderRadius: 10, padding: "14px 16px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#818cf8", fontSize: 13 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#4d9ff5", fontSize: 13 }}>
                   <Icon name="spinner" size={14} className="animate-spin" />
                   <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: 260 }}>{uploadProgress.name}</span>
-                  {uploadProgress.total > 1 && <span style={{ color: "#4b5563", fontSize: 12, flexShrink: 0 }}>({uploadProgress.index}/{uploadProgress.total})</span>}
+                  {uploadProgress.total > 1 && <span style={{ color: "#2d4a6a", fontSize: 12, flexShrink: 0 }}>({uploadProgress.index}/{uploadProgress.total})</span>}
                 </div>
-                <span style={{ fontSize: 13, fontWeight: 700, color: "#818cf8", flexShrink: 0, marginLeft: 12 }}>{uploadProgress.pct}%</span>
+                <span style={{ fontSize: 13, fontWeight: 700, color: "#4d9ff5", flexShrink: 0, marginLeft: 12 }}>{uploadProgress.pct}%</span>
               </div>
-              <div style={{ background: "#2a2a3a", borderRadius: 4, height: 5, overflow: "hidden" }}>
-                <div style={{ height: "100%", width: `${uploadProgress.pct}%`, background: "linear-gradient(90deg, #6366f1, #8b5cf6)", borderRadius: 4, transition: "width 0.1s ease" }} />
+              <div style={{ background: "#122040", borderRadius: 4, height: 5, overflow: "hidden" }}>
+                <div style={{ height: "100%", width: `${uploadProgress.pct}%`, background: "linear-gradient(90deg, #1d6af0, #0ea5e9)", borderRadius: 4, transition: "width 0.1s ease" }} />
               </div>
             </div>
           )}
 
           {filteredFiles.length === 0 && !uploadProgress && (
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: 320, color: "#4b5563", gap: 12 }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: 320, color: "#2d4a6a", gap: 12 }}>
               <Icon name={activeSection === "trash" ? "trash" : activeSection === "starred" ? "star" : activeSection === "shared" ? "shared" : activeSection === "recent" ? "recent" : "upload"} size={56} />
               <p style={{ fontSize: 16, fontWeight: 500 }}>
                 {activeSection === "trash" ? "Trash is empty" : activeSection === "starred" ? "No starred files" : activeSection === "shared" ? "Nothing shared with you" : activeSection === "recent" ? "No recent files" : "No files yet"}
               </p>
-              {activeSection === "my-drive" && <p style={{ fontSize: 13 }}>Click <strong style={{ color: "#818cf8" }}>New</strong> or drag & drop files here</p>}
+              {activeSection === "my-drive" && <p style={{ fontSize: 13 }}>Click <strong style={{ color: "#4d9ff5" }}>New</strong> or drag & drop files here</p>}
             </div>
           )}
 
@@ -420,12 +419,12 @@ export default function DrivePage() {
                 <div
                   key={file.id}
                   className={`file-card ${selected.includes(file.id) ? "selected" : ""}`}
-                  style={{ background: "#13131e", border: "1px solid #1e1e2e", borderRadius: 14, padding: 14, cursor: "pointer", position: "relative", animationDelay: `${i * 0.02}s`, userSelect: "none" }}
+                  style={{ background: "#070f1e", border: "1px solid #0d1c34", borderRadius: 14, padding: 14, cursor: "pointer", position: "relative", animationDelay: `${i * 0.02}s`, userSelect: "none" }}
                   onClick={e => toggleSelect(file.id, e)}
                   onContextMenu={e => { e.stopPropagation(); handleContextMenu(e, file.id); }}
                 >
                   <button onClick={e => toggleStar(file.id, e)}
-                    style={{ position: "absolute", top: 10, right: 10, background: "none", border: "none", cursor: "pointer", color: file.starred ? "#f59e0b" : "#374151", padding: 2 }}>
+                    style={{ position: "absolute", top: 10, right: 10, background: "none", border: "none", cursor: "pointer", color: file.starred ? "#f59e0b" : "#1e3a5f", padding: 2 }}>
                     <Icon name={file.starred ? "star-filled" : "star"} size={14} />
                   </button>
                   <div style={{ marginBottom: 12 }}>
@@ -435,25 +434,25 @@ export default function DrivePage() {
                     <input autoFocus value={renameValue} onChange={e => setRenameValue(e.target.value)}
                       onBlur={commitRename} onKeyDown={e => { if (e.key === "Enter") commitRename(); if (e.key === "Escape") setRenaming(null); }}
                       onClick={e => e.stopPropagation()}
-                      style={{ background: "#1e1e35", border: "1.5px solid #6366f1", borderRadius: 6, padding: "3px 7px", color: "#e4e4f0", fontSize: 13, width: "100%" }} />
+                      style={{ background: "#0d1c48", border: "1.5px solid #1d6af0", borderRadius: 6, padding: "3px 7px", color: "#e2e8f0", fontSize: 13, width: "100%" }} />
                   ) : (
-                    <p style={{ fontSize: 13, fontWeight: 500, color: "#d1d5db", marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</p>
+                    <p style={{ fontSize: 13, fontWeight: 500, color: "#c8d8e8", marginBottom: 4, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</p>
                   )}
-                  <p style={{ fontSize: 11, color: "#4b5563" }}>{file.size}</p>
+                  <p style={{ fontSize: 11, color: "#2d4a6a" }}>{file.size}</p>
                 </div>
               ))}
             </div>
           )}
 
           {viewMode === "list" && filteredFiles.length > 0 && (
-            <div style={{ background: "#13131e", border: "1px solid #1e1e2e", borderRadius: 14, overflow: "hidden" }} className="animate-in">
-              <div style={{ display: "grid", gridTemplateColumns: "40px 1fr 120px 140px 80px", padding: "10px 16px", borderBottom: "1px solid #1e1e2e", color: "#4b5563", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+            <div style={{ background: "#070f1e", border: "1px solid #0d1c34", borderRadius: 14, overflow: "hidden" }} className="animate-in">
+              <div style={{ display: "grid", gridTemplateColumns: "40px 1fr 120px 140px 80px", padding: "10px 16px", borderBottom: "1px solid #0d1c34", color: "#2d4a6a", fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", textTransform: "uppercase" }}>
                 <span></span><span>Name</span><span>Size</span><span>Modified</span><span></span>
               </div>
               {filteredFiles.map((file, i) => (
                 <div key={file.id}
                   className={`file-card ${selected.includes(file.id) ? "selected" : ""}`}
-                  style={{ display: "grid", gridTemplateColumns: "40px 1fr 120px 140px 80px", padding: "10px 16px", borderBottom: i < filteredFiles.length - 1 ? "1px solid #1a1a28" : "none", cursor: "pointer", alignItems: "center" }}
+                  style={{ display: "grid", gridTemplateColumns: "40px 1fr 120px 140px 80px", padding: "10px 16px", borderBottom: i < filteredFiles.length - 1 ? "1px solid #091528" : "none", cursor: "pointer", alignItems: "center" }}
                   onClick={e => toggleSelect(file.id, e)}
                   onContextMenu={e => { e.stopPropagation(); handleContextMenu(e, file.id); }}
                 >
@@ -462,15 +461,15 @@ export default function DrivePage() {
                     <input autoFocus value={renameValue} onChange={e => setRenameValue(e.target.value)} onBlur={commitRename}
                       onKeyDown={e => { if (e.key === "Enter") commitRename(); if (e.key === "Escape") setRenaming(null); }}
                       onClick={e => e.stopPropagation()}
-                      style={{ background: "#1e1e35", border: "1.5px solid #6366f1", borderRadius: 6, padding: "3px 8px", color: "#e4e4f0", fontSize: 13, maxWidth: 300 }} />
+                      style={{ background: "#0d1c48", border: "1.5px solid #1d6af0", borderRadius: 6, padding: "3px 8px", color: "#e2e8f0", fontSize: 13, maxWidth: 300 }} />
                   ) : (
-                    <span style={{ fontSize: 14, fontWeight: 500, color: "#d1d5db", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</span>
+                    <span style={{ fontSize: 14, fontWeight: 500, color: "#c8d8e8", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{file.name}</span>
                   )}
-                  <span style={{ fontSize: 13, color: "#6b7280" }}>{file.size}</span>
-                  <span style={{ fontSize: 13, color: "#6b7280" }}>{file.modified}</span>
+                  <span style={{ fontSize: 13, color: "#4a6180" }}>{file.size}</span>
+                  <span style={{ fontSize: 13, color: "#4a6180" }}>{file.modified}</span>
                   <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
                     <button onClick={e => toggleStar(file.id, e)}
-                      style={{ background: "none", border: "none", cursor: "pointer", color: file.starred ? "#f59e0b" : "#374151", padding: 4 }}>
+                      style={{ background: "none", border: "none", cursor: "pointer", color: file.starred ? "#f59e0b" : "#1e3a5f", padding: 4 }}>
                       <Icon name={file.starred ? "star-filled" : "star"} size={14} />
                     </button>
                   </div>
@@ -483,7 +482,7 @@ export default function DrivePage() {
 
       {contextMenu && (
         <div
-          style={{ position: "fixed", top: contextMenu.y, left: contextMenu.x, background: "#161622", border: "1px solid #2a2a3a", borderRadius: 12, padding: 6, zIndex: 200, minWidth: 180, boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }}
+          style={{ position: "fixed", top: contextMenu.y, left: contextMenu.x, background: "#060d20", border: "1px solid #122040", borderRadius: 12, padding: 6, zIndex: 200, minWidth: 180, boxShadow: "0 20px 60px rgba(0,0,0,0.6)" }}
           onClick={e => e.stopPropagation()}
           className="animate-in"
         >
@@ -498,7 +497,7 @@ export default function DrivePage() {
             { icon: "trash",    label: "Move to Trash", action: () => moveToTrash(contextMenu.fileId), danger: true },
           ]).map(item => (
             <div key={item.label} className="context-menu-item"
-              style={{ color: (item as any).danger ? "#f87171" : "#d1d5db" }}
+              style={{ color: (item as any).danger ? "#f87171" : "#c8d8e8" }}
               onClick={item.action}>
               <Icon name={item.icon} size={15} />
               {item.label}
